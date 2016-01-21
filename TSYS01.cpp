@@ -89,13 +89,7 @@ TEMP = (-2) * float(C[1]) * pow(10,-21) * pow(adc,4) +
 	  (-2) * float(C[3]) * pow(10,-11) * pow(adc,2) +
    	    1 * float(C[4]) * pow(10,-6) * adc +
       (-1.5) * float(C[5]) * pow(10,-2) ;
-	  
-	  Serial.println((-2) * float(C[1]) * pow(10,-21) * pow(adc,4) + 
-        4 * float(C[2]) * pow(10,-16) * pow(adc,3) +
-	  (-2) * float(C[3]) * pow(10,-11) * pow(adc,2) +
-   	    1 * float(C[4]) * pow(10,-6) * adc +
-      (-1.5) * float(C[5]) * pow(10,-2));
-	  	    
+	    	    
 }
 
 float TSYS01::temperature() {
