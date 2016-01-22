@@ -1,3 +1,19 @@
+
+/* Blue Robotics MS5837 Library Example
+-----------------------------------------------------
+ 
+Title: Blue Robotics MS5837 Library Example
+
+Description: This example demonstrates the MS5837 Library with a connected
+sensor. The example reads the sensor and prints the resulting values
+to the serial terminal.
+
+The code is designed for the Arduino Uno board and can be compiled and 
+uploaded via the Arduino 1.0+ software.
+
+-------------------------------
+The MIT License (MIT)
+
 Copyright (c) 2015 Blue Robotics Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -20,12 +36,15 @@ THE SOFTWARE.
 -------------------------------*/
 
 #include <Wire.h>
+
 #include "TSYS01.h"
 
 TSYS01 sensor;
 
 void setup() {
+  
   Serial.begin(9600);
+  
   Serial.println("Starting");
   
   Wire.begin();
@@ -37,9 +56,13 @@ void setup() {
 void loop() {
 
   sensor.read();
- 
-  Serial.print("Temperature: "); Serial.print(sensor.temperature()); Serial.println(" deg C");
-   
+
+  Serial.print("Temperature: ");
+  
+  Serial.print(sensor.temperature()); 
+  
+  Serial.println(" deg C");
+
   Serial.println("---");
 
   delay(1000);
