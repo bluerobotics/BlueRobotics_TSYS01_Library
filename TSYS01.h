@@ -1,19 +1,20 @@
-/*/* Blue Robotics Arduino MS5837-30BA Pressure/Temperature Sensor Library
+/* Blue Robotics Arduino TSYS01 Temperature Sensor Library
 ------------------------------------------------------------
  
-Title: Blue Robotics Arduino MS5837-30BA Pressure/Temperature Sensor Library
+Title: Blue Robotics Arduino TSYS01 Temperature Sensor Library
 
 Description: This library provides utilities to communicate with and to
-read data from the Measurement Specialties MS5837-30BA pressure/temperature 
+read data from the Measurement Specialties TSYS01 temperature 
 sensor.
 
 Authors: Rustom Jehangir, Blue Robotics Inc.
+				 Jonathan Newman, Blue Robotics Inc.
          Adam Šimko, Blue Robotics Inc.
 
 -------------------------------
 The MIT License (MIT)
 
-Copyright (c) 2015 Blue Robotics Inc.
+Copyright (c) 2016 Blue Robotics Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -64,6 +65,7 @@ private:
 	uint16_t C[8];
 	uint32_t D1;
 	float TEMP;
+	uint32_t adc;
 
 	/** Performs calculations per the sensor data sheet for conversion and
 	 *  second order compensation.
