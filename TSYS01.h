@@ -6,7 +6,7 @@ Description: This library provides utilities to communicate with and to
 read data from the Measurement Specialties TSYS01 temperature 
 sensor.
 Authors: Rustom Jehangir, Blue Robotics Inc.
-		 Jonathan Newman, Blue Robotics Inc.
+				 Jonathan Newman, Blue Robotics Inc.
          Adam Šimko, Blue Robotics Inc.
 -------------------------------
 The MIT License (MIT)

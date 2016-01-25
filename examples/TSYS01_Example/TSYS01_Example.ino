@@ -1,10 +1,10 @@
 
-/* Blue Robotics MS5837 Library Example
+/* Blue Robotics TSYS01 Library Example
 -----------------------------------------------------
  
-Title: Blue Robotics MS5837 Library Example
+Title: Blue Robotics TSYS01 Library Example
 
-Description: This example demonstrates the MS5837 Library with a connected
+Description: This example demonstrates the TSYS01 Library with a connected
 sensor. The example reads the sensor and prints the resulting values
 to the serial terminal.
 
@@ -14,7 +14,7 @@ uploaded via the Arduino 1.0+ software.
 -------------------------------
 The MIT License (MIT)
 
-Copyright (c) 2015 Blue Robotics Inc.
+Copyright (c) 2016 Blue Robotics Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -62,8 +62,6 @@ void loop() {
   Serial.print(sensor.temperature()); 
   
   Serial.println(" deg C");
-
-  Serial.println("---");
 
   delay(1000);
 }

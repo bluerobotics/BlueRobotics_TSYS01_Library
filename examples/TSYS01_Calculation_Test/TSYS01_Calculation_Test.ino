@@ -1,9 +1,7 @@
-
-
-/* Blue Robotics MS5837 Library Calculation Test Code
+/* Blue Robotics TSYS01 Library Calculation Test Code
 -----------------------------------------------------
  
-Title: Blue Robotics MS5837 Library Calculation Test Code
+Title: Blue Robotics TSYS01 Library Calculation Test Code
 
 Description: This example is only used to test the conversion calculations
 from the part datasheet. It does not actually communicate with the sensor.
@@ -14,7 +12,7 @@ uploaded via the Arduino 1.0+ software.
 -------------------------------
 The MIT License (MIT)
 
-Copyright (c) 2015 Blue Robotics Inc.
+Copyright (c) 2016 Blue Robotics Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -36,9 +34,9 @@ THE SOFTWARE.
 -------------------------------*/
 
 #include <Wire.h>
-#include "MS5837.h"
+#include "TSYS01.h"
 
-MS5837 sensor;
+TSYS01 sensor;
 
 void setup() {
   Serial.begin(9600);
@@ -50,7 +48,8 @@ void loop() {
   sensor.readTestCase();
 
   Serial.print("Temperature: "); Serial.print(sensor.temperature()); Serial.print(" deg C");
-  Serial.print("(Should be 19.82 deg C)"); Serial.println();
+
+  Serial.print("(Should be 10.58 deg C)"); Serial.println();
 
   delay(10000);
 }
