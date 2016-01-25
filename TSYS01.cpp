@@ -36,7 +36,6 @@ void TSYS01::read() {
 	Wire.beginTransmission(TSYS01_ADDR);
 	Wire.write(TSYS01_ADC_TEMP_CONV);
 	Wire.endTransmission();
-
  
 	delay(10); // Max conversion time per datasheet
 	
@@ -65,34 +64,22 @@ void TSYS01::readTestCase() {
 
 	D1 = 9378708;
 	
-	uint32_t adc;
-	
 	adc = D1/256;
 
 	calculate();
 }
 
-void TSYS01::calculate() {
+void TSYS01::calculate() {	
+	adc = D1/256; 
 
-//TEMP = -2 * uint32_t(C[1]) * (pow(uint64_t(D1/256),4) / 1000000000000ULL / 1000000000ULL) + 
- //       4 * uint32_t(C[2])  * pow(uint64_t(D1/256),3) / 10000000000000000ULL + 
-//		(-2) * uint32_t(C[3]) * pow(uint32_t(D1/256),2) / 100000000000ULL +
-//		1 * uint32_t(C[4]) * D1/256 / 1000000ul +
-	//	(-1.5) * uint32_t(C[5]) / 100ul;
-	
-    uint32_t adc;
-	
-	adc=D1/256;
-
-TEMP = (-2) * float(C[1]) * pow(10,-21) * pow(adc,4) + 
-        4 * float(C[2]) * pow(10,-16) * pow(adc,3) +
-	  (-2) * float(C[3]) * pow(10,-11) * pow(adc,2) +
-   	    1 * float(C[4]) * pow(10,-6) * adc +
-      (-1.5) * float(C[5]) * pow(10,-2) ;
+	TEMP = (-2) * float(C[1]) /1000000000000000000000.0f * pow(adc,4) + 
+         4 * float(C[2]) / 10000000000000000.0f * pow(adc,3) +
+	       (-2) * float(C[3]) / 100000000000.0f * pow(adc,2) +
+   	     1 * float(C[4]) /1000000.0f * adc +
+         (-1.5) * float(C[5]) /100.0f;
 	    	    
 }
 
 float TSYS01::temperature() {
-	return TEMP ;
+	return TEMP;
 }
-

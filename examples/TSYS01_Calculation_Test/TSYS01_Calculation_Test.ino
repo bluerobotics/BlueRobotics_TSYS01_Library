@@ -41,7 +41,7 @@ THE SOFTWARE.
 MS5837 sensor;
 
 void setup() {
-  Serial.begin(57600);
+  Serial.begin(9600);
   
   Wire.begin();
 }
@@ -49,10 +49,8 @@ void setup() {
 void loop() {
   sensor.readTestCase();
 
-  Serial.print("Pressure: "); Serial.print(sensor.pressure()); Serial.print(" mbar");
-  Serial.print("(Should be 3999.8 mbar before 2nd order corrections)"); Serial.println();
   Serial.print("Temperature: "); Serial.print(sensor.temperature()); Serial.print(" deg C");
-  Serial.print("(Should be 19.81 deg C before 2nd order corrections)"); Serial.println();
+  Serial.print("(Should be 19.82 deg C)"); Serial.println();
 
   delay(10000);
 }
