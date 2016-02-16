@@ -1,0 +1,17 @@
+language: python
+python:
+    - "2.7"
+
+cache:
+    directories:
+        - "~/.platformio"
+
+env:
+    - PLATFORMIO_CI_SRC=examples/TSYS01_Calculation_Test/TSYS01_Calculation_Test.ino
+    - PLATFORMIO_CI_SRC=examples/TSYS01_Example/TSYS01_Example.ino
+
+install:
+    - pip install -U platformio
+
+script:
+    - platformio ci --lib="." --board=uno --board=megaatmega2560
