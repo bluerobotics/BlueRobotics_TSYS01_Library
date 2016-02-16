@@ -1,4 +1,4 @@
-# BlueRobotics TSYS01 Temperature Sensor Library
+# BlueRobotics TSYS01 Temperature Sensor Library [![Build Status](https://travis-ci.org/bluerobotics/BlueRobotics_TSYS01_Library.svg?branch=master)](https://travis-ci.org/bluerobotics/BlueRobotics_TSYS01_Library)
 
 Arduino library for the TSYS01 temperature sensor. The TSYS01 is a high-accuracy, fast-response subsea temperature sensor from Measurement Specialties. 
 
