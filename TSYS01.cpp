@@ -62,7 +62,7 @@ void TSYS01::readTestCase() {
 	C[6] = 0;
 	C[7] = 0;
 
-	D1 = 9378708;
+	D1 = 9378708.0f;
 	
 	adc = D1/256;
 
@@ -72,15 +72,14 @@ void TSYS01::readTestCase() {
 void TSYS01::calculate() {	
 	adc = D1/256; 
 
-	TEMP = (-2) * float(C[1]) * pow(10,-21) * pow(adc,4) + 
-         4 * float(C[2]) * pow(10,-16) * pow(adc,3) +
-	       (-2) * float(C[3]) * pow(10,-11) * pow(adc,2) +
-   	     1 * float(C[4]) * pow(10,-6) * adc +
-         (-1.5) * float(C[5]) * pow(10,-2);
-	    	    
+TEMP = (-2) * float(C[1]) / 1000000000000000000000.0f * pow(adc,4) + 
+        4 * float(C[2]) / 10000000000000000.0f * pow(adc,3) +
+	  (-2) * float(C[3]) / 100000000000.0f * pow(adc,2) +
+   	    1 * float(C[4]) / 1000000.0f * adc +
+      (-1.5) * float(C[5]) / 100 ;
+
 }
 
 float TSYS01::temperature() {
 	return TEMP;
 }
-

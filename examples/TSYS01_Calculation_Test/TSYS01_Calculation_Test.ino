@@ -48,7 +48,8 @@ void loop() {
   sensor.readTestCase();
 
   Serial.print("Temperature: "); Serial.print(sensor.temperature()); Serial.print(" deg C");
-  Serial.print("(Should be ? deg C)"); Serial.println();
+
+  Serial.print("(Should be 10.58 deg C)"); Serial.println();
 
   delay(10000);
 }
