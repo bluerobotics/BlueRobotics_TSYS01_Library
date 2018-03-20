@@ -37,7 +37,7 @@ class TSYS01 {
 public:
 
 
-	TSYS01(uint8_t i2cAddress);
+	TSYS01(uint8_t i2cAddress = 0x77);
 
 	bool isValid();
 	void init();
