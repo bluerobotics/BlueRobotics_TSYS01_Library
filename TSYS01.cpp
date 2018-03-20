@@ -1,6 +1,11 @@
 #include "TSYS01.h"
 #include <Wire.h>
 
+#ifdef TSYS01_USE_LOW_POWER
+	#warning "TSYS01_USE_LOW_POWER: enabled"
+	#include <LowPower.h>
+#endif
+
 #define TSYS01_RESET                       0x1E
 #define TSYS01_ADC_READ                    0x00
 #define TSYS01_ADC_TEMP_CONV               0x48
@@ -26,7 +31,11 @@ void TSYS01::init() {
 	Wire.write(TSYS01_RESET);
 	Wire.endTransmission();
 	
+ 	#ifdef TSYS01_USE_LOW_POWER
+	LowPower.powerDown(SLEEP_15MS, ADC_OFF, BOD_OFF);
+	#else
 	delay(10);
+	#endif
 	
 		// Read calibration values
 	for ( uint8_t i = 0 ; i < 8 ; i++ ) {
@@ -44,9 +53,13 @@ void TSYS01::read() {
 	Wire.beginTransmission(mAddress);
 	Wire.write(TSYS01_ADC_TEMP_CONV);
 	Wire.endTransmission();
- 
-	delay(10); // Max conversion time per datasheet
 	
+	#ifdef TSYS01_USE_LOW_POWER
+	LowPower.powerDown(SLEEP_15MS, ADC_OFF, BOD_OFF);
+	#else
+	delay(10); // Max conversion time per datasheet
+	#endif
+
 	Wire.beginTransmission(mAddress);
 	Wire.write(TSYS01_ADC_READ);
 	Wire.endTransmission();
