@@ -1,19 +1,28 @@
 #include "TSYS01.h"
 #include <Wire.h>
 
-#define TSYS01_ADDR                        0x77  
 #define TSYS01_RESET                       0x1E
 #define TSYS01_ADC_READ                    0x00
 #define TSYS01_ADC_TEMP_CONV               0x48
 #define TSYS01_PROM_READ                   0XA0
 
-TSYS01::TSYS01() {
+TSYS01::TSYS01(uint8_t i2cAddress)
+	: mAddress(i2cAddress)
+{}
 
+bool TSYS01::isValid() {
+	return mAddress != 0;
 }
 
 void TSYS01::init() {
+	Wire.beginTransmission(mAddress);
+	if (Wire.endTransmission() != 0) {
+		mAddress = 0;
+		return;
+	}
+
 	// Reset the TSYS01, per datasheet
-	Wire.beginTransmission(TSYS01_ADDR);
+	Wire.beginTransmission(mAddress);
 	Wire.write(TSYS01_RESET);
 	Wire.endTransmission();
 	
@@ -21,34 +30,33 @@ void TSYS01::init() {
 	
 		// Read calibration values
 	for ( uint8_t i = 0 ; i < 8 ; i++ ) {
-		Wire.beginTransmission(TSYS01_ADDR);
+		Wire.beginTransmission(mAddress);
 		Wire.write(TSYS01_PROM_READ+i*2);
 		Wire.endTransmission();
 
-		Wire.requestFrom(TSYS01_ADDR,2);
+		Wire.requestFrom(mAddress, uint8_t(2));
 		C[i] = (Wire.read() << 8) | Wire.read();
 	}
 
 }
 
 void TSYS01::read() {
-	
-	Wire.beginTransmission(TSYS01_ADDR);
+	Wire.beginTransmission(mAddress);
 	Wire.write(TSYS01_ADC_TEMP_CONV);
 	Wire.endTransmission();
  
 	delay(10); // Max conversion time per datasheet
 	
-	Wire.beginTransmission(TSYS01_ADDR);
+	Wire.beginTransmission(mAddress);
 	Wire.write(TSYS01_ADC_READ);
 	Wire.endTransmission();
-
-	Wire.requestFrom(TSYS01_ADDR,3);
+	
+	Wire.requestFrom(mAddress, uint8_t(3));
 	D1 = 0;
 	D1 = Wire.read();
 	D1 = (D1 << 8) | Wire.read();
 	D1 = (D1 << 8) | Wire.read();
-
+	
 	calculate();
 }
 
