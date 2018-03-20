@@ -36,8 +36,10 @@ THE SOFTWARE.
 class TSYS01 {
 public:
 
-	TSYS01();
 
+	TSYS01(uint8_t i2cAddress = 0x77);
+
+	bool isValid();
 	void init();
 
 	/** The read from I2C takes up for 40 ms, so use sparingly is possible.
@@ -59,6 +61,7 @@ private:
 	uint32_t D1;
 	float TEMP;
 	uint32_t adc;
+	uint8_t mAddress;
 
 	/** Performs calculations per the sensor data sheet for conversion and
 	 *  second order compensation.
