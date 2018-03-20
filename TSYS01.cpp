@@ -2,6 +2,7 @@
 #include <Wire.h>
 
 #ifdef TSYS01_USE_LOW_POWER
+	// Use deep sleep instead of delay() to save power. Get the library from https://github.com/LowPowerLab/LowPower
 	#warning "TSYS01_USE_LOW_POWER: enabled"
 	#include <LowPower.h>
 #endif
