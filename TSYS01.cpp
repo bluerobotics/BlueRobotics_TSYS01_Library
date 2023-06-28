@@ -11,23 +11,24 @@ TSYS01::TSYS01() {
 
 }
 
-void TSYS01::init() {
+bool TSYS01::init() {
 	// Reset the TSYS01, per datasheet
 	Wire.beginTransmission(TSYS01_ADDR);
 	Wire.write(TSYS01_RESET);
 	Wire.endTransmission();
 	
 	delay(10);
-	
+	int received_bytes = 0;
 		// Read calibration values
 	for ( uint8_t i = 0 ; i < 8 ; i++ ) {
 		Wire.beginTransmission(TSYS01_ADDR);
 		Wire.write(TSYS01_PROM_READ+i*2);
 		Wire.endTransmission();
 
-		Wire.requestFrom(TSYS01_ADDR,2);
+		received_bytes += Wire.requestFrom(TSYS01_ADDR,2);
 		C[i] = (Wire.read() << 8) | Wire.read();
 	}
+	return received_bytes > 0;
 
 }
 
