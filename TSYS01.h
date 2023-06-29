@@ -38,7 +38,7 @@ public:
 
 	TSYS01();
 
-	void init();
+	bool init();
 
 	/** The read from I2C takes up for 40 ms, so use sparingly is possible.
 	 */
