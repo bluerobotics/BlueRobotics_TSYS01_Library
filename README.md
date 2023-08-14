@@ -1,4 +1,4 @@
-# BlueRobotics TSYS01 Temperature Sensor Library [![Build Status](https://travis-ci.org/bluerobotics/BlueRobotics_TSYS01_Library.svg?branch=master)](https://travis-ci.org/bluerobotics/BlueRobotics_TSYS01_Library)
+# BlueRobotics TSYS01 Temperature Sensor Library
 
 Arduino library for the TSYS01 temperature sensor. The TSYS01 is a high-accuracy, fast-response subsea temperature sensor from Measurement Specialties. 
 
@@ -9,7 +9,9 @@ Please see the examples for normal operation. Below are the available functions 
 ``` cpp
 TSYS01();
 
-void init();
+/** Initialize the sensor - return false if not detected.
+ */
+bool init();
 
 /** The read from I2C takes up for 40 ms, so use sparingly is possible.
  */
@@ -28,7 +30,9 @@ float temperature();
 
 # Versions
 
-0.0 - Under development
+- `1.0.1` - added initialization validation
+- `1.0.0` - initial release
+- `0.0` - Under development
 
 # Reference
 
