@@ -32,11 +32,12 @@ THE SOFTWARE.
 #define TSYS01_H_BLUEROBOTICS
 
 #include "Arduino.h"
+#include <Wire.h>
 
 class TSYS01 {
 public:
 
-	TSYS01();
+	TSYS01(TwoWire *wire = &Wire);
 
 	bool init();
 
@@ -55,6 +56,7 @@ public:
 	float temperature();
 
 private:
+	TwoWire*  _wire;
 	uint16_t C[8];
 	uint32_t D1;
 	float TEMP;
