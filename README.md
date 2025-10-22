@@ -33,6 +33,7 @@ float temperature();
 
 # Versions
 
+- `1.0.2` - added support for different I2C busses
 - `1.0.1` - added initialization validation
 - `1.0.0` - initial release
 - `0.0` - Under development
