@@ -12,7 +12,7 @@ Please see the examples for normal operation. Below are the available functions 
  */
 TSYS01(TwoWire *wire = &Wire);
 
-/** Initialize the sensor - return false if not detected.
+/** Initialize the sensor connection - return false if not detected.
  */
 bool init();
 
