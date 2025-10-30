@@ -7,8 +7,8 @@ Arduino library for the TSYS01 temperature sensor. The TSYS01 is a high-accuracy
 Please see the examples for normal operation. Below are the available functions used in the library.
 
 ``` cpp
-/** Constructor - optional argument for specifying a different I2C bus (e.g. Wire1), 
- *  will use Wire if not specified.
+/** Construct an instance of the sensor manager, with defined I2C bus connection details.
+ *  Uses the default Wire bus if left unspecified (e.g. TSYS01()).
  */
 TSYS01(TwoWire *wire = &Wire);
 
