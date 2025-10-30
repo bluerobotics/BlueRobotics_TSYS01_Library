@@ -8,7 +8,7 @@ Please see the examples for normal operation. Below are the available functions 
 
 ``` cpp
 /** Construct an instance of the sensor manager, with defined I2C bus connection details.
- *  Uses the default Wire bus if left unspecified (e.g. TSYS01()).
+ *  Uses the default Wire bus if left unspecified (e.g. "TSYS01 mySensor" is equivilent to "TSYS01 mySensor(&Wire)").
  */
 TSYS01(TwoWire *wire = &Wire);
 
