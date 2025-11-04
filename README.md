@@ -7,9 +7,13 @@ Arduino library for the TSYS01 temperature sensor. The TSYS01 is a high-accuracy
 Please see the examples for normal operation. Below are the available functions used in the library.
 
 ``` cpp
-TSYS01();
+/** Construct an instance of the sensor manager, with defined I2C bus connection details.
+ *  Uses the default Wire bus if left unspecified.
+ *  (e.g. "TSYS01 mySensor;" is equivilent to "TSYS01 mySensor(&Wire);")
+ */
+TSYS01(TwoWire *wire = &Wire);
 
-/** Initialize the sensor - return false if not detected.
+/** Initialize the sensor connection - return false if not detected.
  */
 bool init();
 
@@ -30,6 +34,7 @@ float temperature();
 
 # Versions
 
+- `1.0.2` - added support for different I2C busses
 - `1.0.1` - added initialization validation
 - `1.0.0` - initial release
 - `0.0` - Under development

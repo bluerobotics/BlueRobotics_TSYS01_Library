@@ -1,5 +1,4 @@
 #include "TSYS01.h"
-#include <Wire.h>
 
 #define TSYS01_ADDR                        0x77  
 #define TSYS01_RESET                       0x1E
@@ -7,26 +6,26 @@
 #define TSYS01_ADC_TEMP_CONV               0x48
 #define TSYS01_PROM_READ                   0XA0
 
-TSYS01::TSYS01() {
-
+TSYS01::TSYS01(TwoWire *wire) {
+	_wire = wire;
 }
 
 bool TSYS01::init() {
 	// Reset the TSYS01, per datasheet
-	Wire.beginTransmission(TSYS01_ADDR);
-	Wire.write(TSYS01_RESET);
-	Wire.endTransmission();
+	_wire->beginTransmission(TSYS01_ADDR);
+	_wire->write(TSYS01_RESET);
+	_wire->endTransmission();
 	
 	delay(10);
 	int received_bytes = 0;
 		// Read calibration values
 	for ( uint8_t i = 0 ; i < 8 ; i++ ) {
-		Wire.beginTransmission(TSYS01_ADDR);
-		Wire.write(TSYS01_PROM_READ+i*2);
-		Wire.endTransmission();
+		_wire->beginTransmission(TSYS01_ADDR);
+		_wire->write(TSYS01_PROM_READ+i*2);
+		_wire->endTransmission();
 
-		received_bytes += Wire.requestFrom(TSYS01_ADDR,2);
-		C[i] = (Wire.read() << 8) | Wire.read();
+		received_bytes += _wire->requestFrom(TSYS01_ADDR,2);
+		C[i] = (_wire->read() << 8) | _wire->read();
 	}
 	return received_bytes > 0;
 
@@ -34,21 +33,21 @@ bool TSYS01::init() {
 
 void TSYS01::read() {
 	
-	Wire.beginTransmission(TSYS01_ADDR);
-	Wire.write(TSYS01_ADC_TEMP_CONV);
-	Wire.endTransmission();
+	_wire->beginTransmission(TSYS01_ADDR);
+	_wire->write(TSYS01_ADC_TEMP_CONV);
+	_wire->endTransmission();
  
 	delay(10); // Max conversion time per datasheet
 	
-	Wire.beginTransmission(TSYS01_ADDR);
-	Wire.write(TSYS01_ADC_READ);
-	Wire.endTransmission();
+	_wire->beginTransmission(TSYS01_ADDR);
+	_wire->write(TSYS01_ADC_READ);
+	_wire->endTransmission();
 
-	Wire.requestFrom(TSYS01_ADDR,3);
+	_wire->requestFrom(TSYS01_ADDR,3);
 	D1 = 0;
-	D1 = Wire.read();
-	D1 = (D1 << 8) | Wire.read();
-	D1 = (D1 << 8) | Wire.read();
+	D1 = _wire->read();
+	D1 = (D1 << 8) | _wire->read();
+	D1 = (D1 << 8) | _wire->read();
 
 	calculate();
 }
